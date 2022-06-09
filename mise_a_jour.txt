@@ -1,0 +1,94 @@
+ALTER TABLE `calendrier` ADD `caletext14` VARCHAR(10) NULL AFTER `calendrier_categorie_calecatenum`;
+ALTER TABLE `calendrier` ADD `caletext15` VARCHAR(10) NULL AFTER `caletext14`;
+ALTER TABLE `calendrier` ADD `caletext16` VARCHAR(10) NULL AFTER `caletext15`;
+UPDATE calendrier SET caletext14 = "1",caletext15 = "1";
+
+
+CREATE TABLE `calendrier_conditions` (
+  `calecondnum` int(20) NOT NULL,
+  `calendrier_calenum` int(20) DEFAULT NULL,
+  `typeprestation_typeprestnum` int(20) DEFAULT NULL,
+  `calecondprix` float(8,4) DEFAULT NULL,
+  `calecondind` int(2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+ALTER TABLE `calendrier_conditions`
+  ADD PRIMARY KEY (`calecondnum`),
+  ADD KEY `typeprestation_typeprestnum` (`typeprestation_typeprestnum`),
+  ADD KEY `typeprestation_typeprestnum_2` (`typeprestation_typeprestnum`),
+  ADD KEY `calendrier_calenum` (`calendrier_calenum`);
+
+
+ALTER TABLE `calendrier_conditions`
+  MODIFY `calecondnum` int(20) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `calendrier_conditions`
+  ADD CONSTRAINT `calendrier_calenum` FOREIGN KEY (`calendrier_calenum`) REFERENCES `calendrier` (`calenum`),
+  ADD CONSTRAINT `typepresatation_typeprestnum` FOREIGN KEY (`typeprestation_typeprestnum`) REFERENCES `typeprestation` (`typeprestnum`);
+
+
+ALTER TABLE `caissesysteme1` ADD `caissyst1` INT(2) NULL AFTER `caissyst1email`;
+ALTER TABLE `caissesysteme1` CHANGE `caissyst1` `caissyst1indice` INT(2) NULL DEFAULT NULL;
+UPDATE caissesysteme1 SET caissyst1indice = "1";
+ALTER TABLE `caissesysteme2` ADD `caissyst2date` DATETIME NULL AFTER `caissyst2libe`;
+ALTER TABLE `caissesysteme1` CHANGE `utilisateurs_utilnum` `utilisateurs_utilnum` INT(20) NULL;
+
+CREATE TABLE `panier` (
+  `paninum` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `panier`
+  ADD PRIMARY KEY (`paninum`);
+
+ALTER TABLE `panier`
+  MODIFY `paninum` int(20) NOT NULL AUTO_INCREMENT;
+
+  CREATE TABLE `panier_association` (
+  `paniassonum` int(20) NOT NULL,
+  `panier_paninum` int(20) NOT NULL,
+  `caissesysteme1_caissyst1num` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+ALTER TABLE `panier_association`
+  ADD PRIMARY KEY (`paniassonum`),
+  ADD KEY `panier_paninum` (`panier_paninum`),
+  ADD KEY `caissesysteme1_caissyst1num` (`caissesysteme1_caissyst1num`);
+
+
+ALTER TABLE `panier_association`
+  MODIFY `paniassonum` int(20) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `panier_association`
+  ADD CONSTRAINT `panier_association_ibfk_1` FOREIGN KEY (`panier_paninum`) REFERENCES `panier` (`paninum`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `panier_association_ibfk_2` FOREIGN KEY (`caissesysteme1_caissyst1num`) REFERENCES `caissesysteme1` (`caissyst1num`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+ALTER TABLE `panier` ADD `AA_equimondo_hebeappnum` INT(20) NOT NULL AFTER `paninum`;
+ALTER TABLE `panier` ADD INDEX(`AA_equimondo_hebeappnum`);
+ALTER TABLE `panier` ADD FOREIGN KEY (`AA_equimondo_hebeappnum`) REFERENCES `AA_equimondo_hebergement_application`(`AA_equimondo_hebeappnum`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+
+
+CREATE TABLE `clientssoldeforf` (
+  `clientssoldeforfnum` int(20) NOT NULL,
+  `clientssoldeforfentree_cliesoldforfentrnum` int(20) DEFAULT NULL,
+  `clientssoldeforfsortie_cliesoldforfsortnum` int(20) DEFAULT NULL,
+  `clientssoldeforfdate1` datetime DEFAULT NULL,
+  `clientssoldeforfdate2` datetime DEFAULT NULL,
+  `clients_clienum` int(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `clientssoldeforf`
+  ADD PRIMARY KEY (`clientssoldeforfnum`),
+  ADD KEY `clientssoldeforfentree_cliesoldforfentrnum` (`clientssoldeforfentree_cliesoldforfentrnum`),
+  ADD KEY `clientssoldeforfsortie_cliesoldforfsortnum` (`clientssoldeforfsortie_cliesoldforfsortnum`),
+  ADD KEY `clients_clienum` (`clients_clienum`);
+
+ALTER TABLE `clientssoldeforf`
+  MODIFY `clientssoldeforfnum` int(20) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `clientssoldeforf`
+  ADD CONSTRAINT `clientssoldeforf_ibfk_1` FOREIGN KEY (`clientssoldeforfentree_cliesoldforfentrnum`) REFERENCES `clientssoldeforfentree` (`cliesoldforfentrnum`),
+  ADD CONSTRAINT `clientssoldeforf_ibfk_2` FOREIGN KEY (`clientssoldeforfsortie_cliesoldforfsortnum`) REFERENCES `clientssoldeforfsortie` (`cliesoldforfsortnum`),
+  ADD CONSTRAINT `clientssoldeforf_ibfk_3` FOREIGN KEY (`clients_clienum`) REFERENCES `clients` (`clienum`);

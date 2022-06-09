@@ -1,0 +1,15 @@
+/* This file is reserved for overriding and extending the template styles. */
+select#cheval {
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #e6e6e6;
+    width: 200px;
+  }
+  button#ajouSign {
+    background: #20aeef;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+  }

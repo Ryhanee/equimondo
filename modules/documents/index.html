@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>DEMO HTML5 SIGNATURE PAD</title>
+<style type="text/css">
+/**
+* This CSS is for this demo page only.
+*/
+.alignC {
+	text-align: center;
+}
+#testDiv {
+	position: relative;
+	width: 600px;
+	min-height: 400px;
+	padding: 20px;
+	margin: 30px auto;
+	color: #000000;
+	background-color: #ffffff;
+	border: solid 1px #c0c0c0;
+	overflow: hidden;
+	border-radius: 5pt;
+	box-shadow: 0pt 0pt 4pt #c0c0c0;
+}
+#testTitle {
+	position: relative;
+	margin: -20px -20px 20px -20px;
+	color: #ffffff;
+	background-color: #808080;
+}
+#testTitle h1 {
+	margin: 0px;
+	padding: 8px;
+}
+#signatureSet {
+	position: relative;
+	height: 110px;
+	margin: 0px 70px 0px 70px;
+	padding: 10px;
+	text-align: center;
+	border: solid 1px #c0c0c0;
+	background-color: #efefef;
+	border-radius: 4pt;
+}
+#footerDiv {
+	position: relative;
+	width: 600px;
+	padding: 20px;
+	margin: 30px auto;
+	text-align: center;
+	font-size: 12px;
+	color: #000000;
+	background-color: #ffffff;
+	border: solid 1px #c0c0c0;
+	overflow: hidden;
+	border-radius: 5pt;
+	box-shadow: 0pt 0pt 4pt #c0c0c0;
+}
+</style>
+<script type="text/javascript">
+/**
+* This function is for this demo page only.
+*/
+function demo_postSaveAction(f) {
+	var objParent=document.getElementById('testDiv');
+	var objDiv=document.createElement('div');
+	with(objDiv) {
+		setAttribute('id','demo_downloadWrapper');
+		with(style) {
+			position="relative";
+			padding="10px";
+			textAlign="left";
+			margin="15px 70px 0px 70px";
+			border="solid 1px #c0c0c0";
+			backgroundColor="#efefef";
+			borderRadius="4pt";
+		}
+		innerHTML="<h4>Demo signature saved to image. Click to download.</h4>";
+		innerHTML+="<ul><li><a href=\"dd_signature_process.php?download="+f+"\" target=\"_blank\">"+f+"</a></li></ul>";
+	}
+	objParent.appendChild(objDiv);
+}
+</script>
+
+<!-- INCUDE OUR NEC. FILES -->
+<link type="text/css" rel="stylesheet" media="screen" href="css/dd_signature_pad.css" />	
+<script type="text/javascript" src="js/dd_signature_pad.js"></script>
+<!-- END OF NEC. FILES -->
+</head>
+<body>
+
+
+<div id="testDiv">
+	
+	<div id="testTitle">
+		<h1>HTML5 Signature Pad Demo &nbsp; <span style="font-size:11px;">version 1.4</span></h1>
+	</div>
+	
+	<p class="alignC">
+		<span style="color:#ff0000;">NOTE: this demo must be run on a server or local server setup.</span><br />
+		Add your signature in the white box below. Then click on 'Save Signature' to export it to an image.
+	</p>
+	<ul><strong style="color:#ff0000;">Features:</strong><br />
+		<li>Export signature directly to PNG image format</li>
+		<li>Lots of customizable options</li>
+		<li>Compatible with Touch-Screen devices, including iPhones, iPads &amp; iPod Touch!</li>
+		<li>Change signature color on the fly</li>
+		<li>Change pencil thickness</li>
+		<li>Unlimited Undo</li>
+		<li>No jQuery libraries needed</li>
+	</ul>
+	
+	<div id="signatureSet">
+		<div id="dd_signaturePadWrapper"></div>
+	</div>
+
+</div>
+<div id="footerDiv">
+	Designed &amp; Developed by: Dream Designs @ <a href="http://www.dreamdesignsweb.com" target="_new">www.dreamdesignsweb.com</a>
+</div>
+
+
+</body>
+</html>
